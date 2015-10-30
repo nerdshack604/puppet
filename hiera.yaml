@@ -1,0 +1,10 @@
+---
+:backends: yaml
+:yaml:
+  :datadir: /etc/puppet/hiera
+:hierarchy:
+  - defaults
+  - "%{clientcert}"
+  - "%{environment}"
+  - global
+:logger: console

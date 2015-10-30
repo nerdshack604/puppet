@@ -1,0 +1,18 @@
+[Unit]
+Description=<%= @approot %> daemon
+#Requires=<%= @approot %>.socket
+After=network.target
+
+[Service]
+PIDFile=/var/run/gunicorn/<%= @approot %>.pid
+Restart=always
+User=nginx
+Group=nginx
+WorkingDirectory=/webapps/<%= @approot %>
+ExecStart=/webapps/<%= @approot %>/bin/gunicorn  --workers 3 --bind unix:/webapps/<%= @approot %>/run/<%= @approot %>.sock -m 007 --pid /var/run/gunicorn/<%= @approot %>.pid <%= @approot %>.wsgi:application
+ExecReload=/bin/kill -s HUP /var/run/gunicorn/<%= @approot %>.pid
+ExecStop=/bin/kill -s TERM /var/run/gunicorn/<%= @approot %>.pid
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

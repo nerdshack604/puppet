@@ -1,0 +1,32 @@
+--- 
+approots: 
+  linkoverflow: 
+    approot: linkoverflow
+    host_name: linkoverflow.com
+    host_port: 80
+    owner: deploy
+accounts::users:
+ deploy:
+   comment: "Deploy Bot"
+   uid: 1001
+   groups: [ "deploy" ]
+   shell: "/bin/bash"
+   pwhash: "$6$749mE45H$WEzov8G9JixqmyBl9vLVZWBoVyvS7uPSqGMB6v97Tx4HNnaNSYgDbY1iK7xnOm5KwTWCwa/Cy.Ss7Zh/EVMXF."
+   ssh_key:
+    type: "ssh-dss"
+    key: "AAAAB3NzaC1kc3MAAACBAIMHu3cUM22sEMkbtYllUANrfkMjZc5EPj7NIwiUECLiZLtKYfuqSL4Pr1AUh80DcOVbjuN2ua8s8FT/yzztG8rFqr0lImHl85d+qXYABMYg/MC4HKmRNnATq09YDndvlCf6lpf1sw7Kr8GS27/dyHLBnSkH+R76Fd63zP5/QBWnAAAAFQDn6FL9AT16UvYWKTLAm8ThutMsqQAAAIEAgdLk/iQQoZVqJ5DmL0S9Qzlyzb1FdFyJ2Bpsbb8WDij4j1Ci8B0lMnJTDoTgRBPqYplUPOgqtzt0d+/DtbODhrgRWACCSy25ad43iDHUa12+0NvBUZGtxB9k2YkAu4UqNrSVh/HkeDze2dYuH0hpiEgYsrS+0GnzAwxUynKQF2cAAACAXU0BjulL34yjPI88iw/1siSWsP0o2wX5PH7/9INu5mvFF+bRSgEfae4USBlkgVIcWd588u6xjbMRlOdBANsNtSuCnOR/mRN//GtS+iyiT4Ci4la1KbSnyuApcM6kf4MVehfoZ52IJ5T+83vk/cDoe9Qh7xzZEyN6T5aE7fvytZ4="
+ vallen:
+   comment: "Vince Allen"
+   uid: 703
+   groups: [ "vallen", "wheel" ]
+   shell: "/bin/bash"
+   pwhash: "$6$fDzQiPm/$ZICOOhJXwBYQoHObRhDGS0zSs1vYEZtuNrw5ueY/KgfyOzY8JbyLENQAwwVK/668ZW1uMnVKxIO4gDQYc9Cpe/"
+   ssh_key:
+    type: "ssh-dss"
+    key: "AAAAB3NzaC1kc3MAAACBAKUpDS34RfP20HR7GKgzVsg2DsI5KcVjExSePHxx6d9R9jb/bBeR/9cXyPH5h1xc9hYT/NRKvUiMuMPTMzrVBI9nOWkewWifGF9era1P94DqiKju6xjlu0ti3+IMmBogY3AkN+FaBV3qgQ0sIQ/DtKSFuhniBMjfG9/IbqHAks2pAAAAFQDVcuo35MvbwRqCXukbpv4dhz7iTQAAAIBNJNNm4O0AIuVEgO+g91AdImPaF1fzUMkiqilxthl6mws2aICQc3+nxJNbXRuc4TDliiMKusLqYFTZJGK3pVdbmqXEF9E41ZYs1mziwyo2KVuqjvGOo6UcAEPreT3FB7xJgyn8GlmkopU/rXYWvGszGXbdtihIeLma7/mGAimPbwAAAIAf3LbOvBsazFY/a2GdwPWkhtST62RyU5tAWG8o69keNo7O79QsgmIShyXuUpB6C5xq066JoQ3+AllXJEIgZo5rxTCqmkZp6crhzV3DhaqwbY2x+UoyEDXQh8KCG9PfvVA4FhuW5c/a8TQgBcFNe28VrClgz22RbFJz+DDmTIpjWw=="
+    comment: "vallen@incendiamedia.com"
+accounts::groups:
+ wheel:
+   gid: 10
+ nginx:
+   gid: 997
