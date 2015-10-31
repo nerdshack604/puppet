@@ -12,5 +12,4 @@ if 	[ ! -f ${WorkingDirectory}/manage.py ]; then
         ${WorkingDirectory}/bin/django-admin.py startproject ${DjangoProject} ${WorkingDirectory}
 	mkdir --mode 0777 ${WorkingDirectory}/run
 fi
-wait
 

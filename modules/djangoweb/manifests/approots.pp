@@ -26,10 +26,10 @@
 # == Sample Usage:
 #
 # approots {'approots::sitename':
-#   approot => 'linkunderflow',
-#   gitrepo => 'git@github.com:incendia/nerdshack604/linkunderflow.git',
+#   approot => 'linkoverflow',
+#   gitrepo => 'git@github.com:incendia/nerdshack604/linkoverflow.git',
 #   host_port => '82',
-#   host_name => 'linkunderflow.com'
+#   host_name => 'linkoverflow.com'
 # }
 #
 
@@ -50,35 +50,36 @@ define djangoweb::approots (
     ) {
 
     file { "${approot}_app_folder":
-      path    => "/webapps/${approot}",
-      ensure  => "directory",
-      owner   => $owner,
-      group   => "nginx",
-      mode    => 2775,
-      #notify  => Exec [ "startproject_${approot}" ],
+      path         => "/webapps/${approot}",
+      ensure       => "directory",
+      owner        => $owner,
+      group        => "nginx",
+      mode         => 2775,
+      notify       => Exec [ "startproject_${approot}" ],
     } 
 
     file { "${approot}_systemd_service":
-      path    => "/etc/systemd/system/${approot}.service",
-      mode    => 644,
-      owner   => "root",
-      group   => "root",
-      checksum => 'md5',
-      content => template('djangoweb/systemd.erb'),
-      require => File [ "${approot}_app_folder" ],
-      notify  => Exec["restart_${approot}_service"]
+      path         => "/etc/systemd/system/${approot}.service",
+      mode         => 644,
+      owner        => "root",
+      group        => "root",
+      checksum     => 'md5',
+      content      => template('djangoweb/systemd.erb'),
+      subscribe    => Exec [ "startproject_${approot}" ],
+      notify       => Exec [ "restart_${approot}_service" ],
     }
 	
     exec { "startproject_${approot}":
-      command => "/usr/bin/su ${owner} -c  '/etc/puppet/modules/djangoweb/files/django-folder-maint.sh ${approot} /webapps/${approot}'",
-      require => File [ "${approot}_app_folder" ],
-      #notify  => Service [ "${approot}_service" ],
+      command      => "/usr/bin/su ${owner} -c  '/etc/puppet/modules/djangoweb/files/django-folder-maint.sh ${approot} /webapps/${approot}'",
+      subscribe    => File [ "${approot}_app_folder" ],
+      notify       => Service [ "${approot}_service" ],
       }
 
     service { "${approot}_service":
-       name     => "${approot}",
-       ensure   => "running",
-       require  => File [ "${approot}_systemd_service" ],
+       name        => "${approot}",
+       #ensure     => "running",
+       subscribe   => File [ "${approot}_systemd_service" ],
+
      }
 
   if ( $gitrepo == '' ) {
@@ -132,6 +133,7 @@ define djangoweb::approots (
 
     exec {"restart_${approot}_service":
       command => "/usr/bin/systemctl daemon-reload; /usr/bin/systemctl enable ${approot}.service; /usr/bin/systemctl restart ${approot}.service",
+      require     => Service [ "${approot}_service" ],      
       refreshonly => true,
     }
 
