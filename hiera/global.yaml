@@ -10,6 +10,16 @@ approots:
     host_name: linkunderflow.com
     host_port: 80
     owner: deploy
+  linkevenflow:
+    approot: linkevenflow
+    host_name: linkevenflow.com
+    host_port: 80
+    owner: deploy
+  linkneverflow:
+    approot: linkneverflow
+    host_name: linkneverflow.com
+    host_port: 80
+    owner: deploy
 accounts::users:
  deploy:
    comment: "Deploy Bot"
