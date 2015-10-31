@@ -42,7 +42,7 @@ file { "/var/run/gunicorn":
     require => Package [ "nginx" ]
    }
  
-$requiredpackages = [ "epel-release", "python-pip", "python-devel", "gcc", "git" ]
+$requiredpackages = [ "epel-release", "python-pip", "python-virtualenv", "python-devel", "gcc", "git" ]
 
 package { $requiredpackages:
     ensure => "installed",
