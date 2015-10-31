@@ -58,6 +58,12 @@ define djangoweb::approots (
       notify       => Exec [ "startproject_${approot}" ],
     } 
 
+    file { "${approot}_requirements}":
+      path         => "/webapps/${approot}/requirements.txt",
+      source       => "/etc/puppet/modules/djangoweb/files/requirements.txt",
+      subscribe    => File [ "${approot}_app_folder" ],
+    }
+
     file { "${approot}_systemd_service":
       path         => "/etc/systemd/system/${approot}.service",
       mode         => 644,
@@ -71,8 +77,8 @@ define djangoweb::approots (
 	
     exec { "startproject_${approot}":
       command      => "/usr/bin/su ${owner} -c  '/etc/puppet/modules/djangoweb/files/django-folder-maint.sh ${approot} /webapps/${approot}'",
-      subscribe    => File [ "${approot}_app_folder" ],
-      notify       => Service [ "${approot}_service" ],
+      #subscribe    => File [ "${approot}_app_folder" ],
+      subscribe    => File [ "${approot}_requirements}" ],
       }
 
     service { "${approot}_service":
