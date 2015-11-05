@@ -6,5 +6,6 @@ echo "Hello! I'm ready to bootstrap your instance.... are you ?"
 cd /etc/
 rm -rf puppet
 git clone https://github.com/nerdshack604/puppet.git puppet
-puppet apply /etc/pupet/manifests/site.pp
+puppet apply /etc/puppet/manifests/site.pp
+
 
