@@ -44,4 +44,4 @@ accounts::groups:
  wheel:
    gid: 10
  nginx:
-   gid: 997
+   gid: 910
