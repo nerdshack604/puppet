@@ -1,0 +1,10 @@
+#! /bin/bash
+
+echo "Hello! I'm ready to bootstrap your instance.... are you ?"
+/usr/bin/yum -y -d 0 -e 0 install epel-release git
+/usr/bin/yum -y -d 0 -e 0 install puppet
+cd /etc/
+rm -rf puppet
+git clone https://github.com/nerdshack604/puppet.git puppet
+puppet apply /etc/pupet/manifests/site.pp
+
